@@ -143,6 +143,8 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		//TODO
+
+		//Dar listeners a los botones para que se abran casillas
 	}
 	
 	
@@ -160,6 +162,10 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
 		//TODO
+		//Seleccionar el panel[i][j] correspondiente
+		//Eliminar todos los componentes: //Buscarlo en internet
+		//Añadimos un JLabel centrado y no editable con el número de minas alrededor
+		//OJO: Que el número de minas se saca de ControlJuego() con getMinasAlrededor();
 	}
 	
 	

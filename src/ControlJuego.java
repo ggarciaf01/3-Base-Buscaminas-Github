@@ -40,11 +40,26 @@ public class ControlJuego {
 
 		//TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
 		//Poner todas las posiciones a cero.
+		for (int i = 0; i < LADO_TABLERO; i++){
+			for (int j = 0; j < LADO_TABLERO; j++){
+				tablero[i][j] = 0;
+			}
+		}
 
 		//Poner la puntuación a cero.
 		puntuacion = 0;
 
-		//Colocar las minas: Mientras te queden minas por colocar, saca una posición aleatoria (x,y) que no tenga minas 		
+		//Colocar las minas: Mientras te queden minas por colocar, saca una posición aleatoria (x,y) que no tenga minas 	
+		int contadorMinas = MINAS_INICIALES;
+		int x, y;
+		while (contadorMinas > 0){
+			x = (int)(Math.random() * LADO_TABLERO);
+			y = (int)(Math.random() * LADO_TABLERO);
+			if(tablero[x][y] != -1){
+				tablero[x][y] = -1;
+				contadorMinas--;
+			}
+		}
 		
 		//Al final del m�todo hay que guardar el n�mero de minas para las casillas que no son mina:
 		for (int i = 0; i < tablero.length; i++) {
@@ -128,7 +143,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		return 0;
+		return tablero[i][j];
 	}
 
 	/**
