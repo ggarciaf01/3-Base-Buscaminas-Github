@@ -86,10 +86,10 @@ public class ControlJuego {
 		int iFinal = Math.min(LADO_TABLERO-1, i+1);
 
 		int jInicial = Math.max(0, j-1);
-		int jFinal = Math.min(LADO_TABLERO, j+1);
+		int jFinal = Math.min(LADO_TABLERO-1, j+1);
 
-		for (int vertical = iInicial; vertical < iFinal; vertical++){
-			for (int horizontal = jInicial; horizontal < jFinal; horizontal++){
+		for (int vertical = iInicial; vertical <= iFinal; vertical++){
+			for (int horizontal = jInicial; horizontal <= jFinal; horizontal++){
 				if(tablero[vertical][horizontal] == MINA){
 					contadorMinasAlrededor++;
 				}
