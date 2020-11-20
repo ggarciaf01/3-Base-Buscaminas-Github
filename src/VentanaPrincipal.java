@@ -20,26 +20,26 @@ import javax.swing.SwingConstants;
 public class VentanaPrincipal {
 
 	//La ventana principal, en este caso, guarda todos los componentes:
-	JFrame ventana;
-	JPanel panelImagen;
-	JPanel panelEmpezar;
-	JPanel panelPuntuacion;
-	JPanel panelJuego;
+	private JFrame ventana;
+	private JPanel panelImagen;
+	private JPanel panelEmpezar;
+	private JPanel panelPuntuacion;
+	private JPanel panelJuego;
 	
 	//Todos los botones se meten en un panel independiente.
 	//Hacemos esto para que podamos cambiar después los componentes por otros
-	JPanel [][] panelesJuego;
-	JButton [][] botonesJuego;
+	private JPanel [][] panelesJuego;
+	private JButton [][] botonesJuego;
 	
 	//Correspondencia de colores para las minas:
-	Color correspondenciaColores [] = {Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED};
+	private Color correspondenciaColores [] = {Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED};
 	
-	JButton botonEmpezar;
-	JTextField pantallaPuntuacion;
+	private JButton botonEmpezar;
+	private JTextField pantallaPuntuacion;
 	
 	
 	//LA VENTANA GUARDA UN CONTROL DE JUEGO:
-	ControlJuego juego;
+	private ControlJuego juego;
 	
 	
 	//Constructor, marca el tamaño y el cierre del frame
@@ -143,7 +143,7 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		//TODO
-
+		
 		//Dar listeners a los botones para que se abran casillas
 	}
 	
@@ -176,12 +176,23 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
 		//TODO
+		for (int i = 0; i < botonesJuego.length; i++){
+			for (int j = 0; j < botonesJuego[i].length; i++){
+				botonesJuego[i][j].setEnabled(false);
+			}
+		}
+		if (porExplosion){
+			JOptionPane.showMessageDialog(null, "Ha explotado una mina.");
+		}else{
+			JOptionPane.showMessageDialog(null, "Has desactivado todas las minas.");
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
+		pantallaPuntuacion.setText(Integer.toString(juego.getPuntuacion()));
 		//TODO
 	}
 	
