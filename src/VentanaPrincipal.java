@@ -145,6 +145,11 @@ public class VentanaPrincipal {
 		//TODO
 		
 		//Dar listeners a los botones para que se abran casillas
+		for (int i = 0; i < botonesJuego.length; i++){
+			for (int j = 0; j < botonesJuego.length; j++){
+				botonesJuego[i][j].addActionListener(new ActionBoton(i, j, this));
+			}
+		}
 	}
 	
 	
@@ -165,7 +170,17 @@ public class VentanaPrincipal {
 		//Seleccionar el panel[i][j] correspondiente
 		//Eliminar todos los componentes: //Buscarlo en internet
 		//Añadimos un JLabel centrado y no editable con el número de minas alrededor
-		//OJO: Que el número de minas se saca de ControlJuego() con getMinasAlrededor();
+		panelesJuego[i][j].removeAll();
+		
+		JLabel jLabel = new JLabel();
+		jLabel.setText(Integer.toString(juego.getMinasAlrededor(i, j)));
+		jLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		jLabel.setVerticalAlignment(SwingConstants.CENTER);
+		jLabel.setForeground(correspondenciaColores[juego.getMinasAlrededor(i, j)]);
+
+		panelesJuego[i][j].add(jLabel);
+
+		refrescarPantalla();
 	}
 	
 	
