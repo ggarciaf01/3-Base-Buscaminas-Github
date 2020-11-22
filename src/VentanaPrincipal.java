@@ -15,7 +15,18 @@ import javax.swing.SwingConstants;
 
 /**
  * Ventana principal del Buscaminas
- * @author {Rellenar por el alumno}
+ * @author Guillermo García Fernández
+ * @version 1.0
+ * @since 22/11/2020
+ * @see ControlJuego
+ * {@link #inicializar()}
+ * {@code 
+ * public void inicializar(){
+ * 		ventana.setVisible(true);
+ * 		inicializarComponentes();	
+ * 		inicializarListeners();		
+ * }
+ * }
  */
 public class VentanaPrincipal {
 
@@ -143,7 +154,12 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		//TODO
-		
+		botonEmpezar.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				resetearPartida();
+			}
+		});
 		//Dar listeners a los botones para que se abran casillas
 		for (int i = 0; i < botonesJuego.length; i++){
 			for (int j = 0; j < botonesJuego.length; j++){
@@ -190,16 +206,15 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
 		for (int i = 0; i < botonesJuego.length; i++){
-			for (int j = 0; j < botonesJuego[i].length; i++){
+			for (int j = 0; j < botonesJuego[i].length; j++){
 				botonesJuego[i][j].setEnabled(false);
 			}
 		}
 		if (porExplosion){
-			JOptionPane.showMessageDialog(null, "Ha explotado una mina.");
+			JOptionPane.showMessageDialog(ventana, "Ha explotado una mina." + "\nPuntuación: " + juego.getPuntuacion());
 		}else{
-			JOptionPane.showMessageDialog(null, "Has desactivado todas las minas.");
+			JOptionPane.showMessageDialog(ventana, "Has desactivado todas las minas." + "\nPuntuación: " + juego.getPuntuacion());
 		}
 	}
 
@@ -215,6 +230,7 @@ public class VentanaPrincipal {
 	 * Método para refrescar la pantalla
 	 */
 	public void refrescarPantalla(){
+		actualizarPuntuacion();
 		ventana.revalidate(); 
 		ventana.repaint();
 	}
@@ -237,6 +253,19 @@ public class VentanaPrincipal {
 		inicializarListeners();		
 	}
 
-
-
+	/**
+	 * Método para resetear la partida
+	 */
+	public void resetearPartida(){
+		for (int i = 0; i < panelesJuego.length; i++) {
+			for (int j = 0; j < panelesJuego[i].length; j++) {
+				panelesJuego[i][j].removeAll();
+				botonesJuego[i][j] = new JButton("-");
+				panelesJuego[i][j].add(botonesJuego[i][j]);
+			}
+		}
+		juego.inicializarPartida();
+		inicializarListeners();
+		refrescarPantalla();
+	}
 }

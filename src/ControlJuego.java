@@ -7,7 +7,7 @@ import java.util.Random;
  * Si hay una mina en una posición guarda el número -1
  * Si no hay una mina, se guarda cuántas minas hay alrededor.
  * Almacena la puntuación de la partida
- * @author jesusredondogarcia
+ * @author Guillermo García Fernández
  *
  */
 public class ControlJuego {
@@ -25,9 +25,6 @@ public class ControlJuego {
 		
 		//Inicializamos una nueva partida
 		inicializarPartida();
-
-		//De momento lo dejo para probar
-		depurarTablero();
 	}
 	
 	
@@ -38,25 +35,24 @@ public class ControlJuego {
 	 */
 	public void inicializarPartida(){
 
-		//TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
-		//Poner todas las posiciones a cero.
+		//Ponemos todas las posiciones a cero.
 		for (int i = 0; i < LADO_TABLERO; i++){
 			for (int j = 0; j < LADO_TABLERO; j++){
 				tablero[i][j] = 0;
 			}
 		}
 
-		//Poner la puntuación a cero.
+		//Ponemos la puntuación a cero.
 		puntuacion = 0;
 
-		//Colocar las minas: Mientras te queden minas por colocar, saca una posición aleatoria (x,y) que no tenga minas 	
+		//Colocamos las minas: Mientras  queden minas por colocar, saca una posición aleatoria (x,y) que no tenga minas 	
 		int contadorMinas = MINAS_INICIALES;
 		int x, y;
 		while (contadorMinas > 0){
 			x = (int)(Math.random() * LADO_TABLERO);
 			y = (int)(Math.random() * LADO_TABLERO);
-			if(tablero[x][y] != -1){
-				tablero[x][y] = -1;
+			if(tablero[x][y] != MINA){
+				tablero[x][y] = MINA;
 				contadorMinas--;
 			}
 		}
@@ -100,14 +96,14 @@ public class ControlJuego {
 	}
 	
 	/**
-	 * Método que nos permite 
+	 * Método que nos permite comprobar si la casilla es una mina o no, sumando un punto a la puntuación en caso de que no lo sea
 	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por el ControlJuego. Por lo tanto siempre sumaremos puntos
 	 * @param i: posición verticalmente de la casilla a abrir
 	 * @param j: posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j){
-		if (tablero[i][j] != -1){
+		if (tablero[i][j] != MINA){
 			puntuacion++;
 			return true;
 		}
